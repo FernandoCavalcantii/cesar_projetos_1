@@ -8,40 +8,42 @@
 const int rs = 3, en = 4, d4 = A2, d5 = A3, d6 = A4, d7 = A5;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
-int horas;
+int segundos_aula_1 = -1;
+int segundos_aula_2 = -1;
+int segundos_intervalo = -1;
 
 byte quadrado_vazio[8] = {
-  B11111,
-  B10001,
-  B10001,
-  B10001,
-  B10001,
-  B10001,
-  B10001,
-  B11111,
+    B11111,
+    B10001,
+    B10001,
+    B10001,
+    B10001,
+    B10001,
+    B10001,
+    B11111,
 };
 
 byte quadrado_preenchido[8] = {
-  B11111,
-  B11111,
-  B11111,
-  B11111,
-  B11111,
-  B11111,
-  B11111,
-  B11111,
+    B11111,
+    B11111,
+    B11111,
+    B11111,
+    B11111,
+    B11111,
+    B11111,
+    B11111,
 };
 
+// CODE THAT RUNS ONCE
+void setup()
+{
 
-// CODE THAT RUNS ONCE 
-void setup() {
-  
   // set up start communications
   Serial.begin(9600);
   Serial.println("initializing setup...");
   Serial.println("Informe duração primeiro periodo de aula");
   // ## Display LCD
-  
+
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
   // Create 02 custom chars to write to display in the LCD
@@ -54,15 +56,14 @@ void setup() {
   // Display Message Initializing on Display LCD
   lcd.setCursor(0, 0);
   lcd.print("Iniciando...");
-  delay (1000);
+  delay(1000);
   lcd.setCursor(8, 1);
   lcd.print("SETUP...");
-  delay (2000);
+  delay(2000);
   lcd.clear();
-  
-  
+
   Serial.println("Projeto Sala Inteligente: Display do Recreio");
-  
+
   // Print a message to the LCD.
   Serial.println("Projeto");
   lcd.setCursor(0, 0);
@@ -73,24 +74,25 @@ void setup() {
   lcd.print("Display Recreio");
   delay(2000);
   lcd.clear();
-  
+
   Serial.println("Carregando... ");
-  
+
   // Iteração do display LCD inicial movendo as letras em um FOR LOOP
-  for (int i = 0; i <= 15; i++) {
+  for (int i = 0; i <= 15; i++)
+  {
     lcd.setCursor(0, 0);
     lcd.print("Carregando...");
     lcd.setCursor(i, 1);
     lcd.print("*");
-    delay (200);
+    delay(200);
     lcd.clear();
-  	}
-   
+  }
+
   Serial.println("## SETUP COMPLETO ##");
 }
 
-
-void montaTelaHello() {
+void montaTelaHello()
+{
   Serial.println("called montaTelaHello()");
   lcd.clear();
   lcd.setCursor(2, 0);
@@ -100,33 +102,39 @@ void montaTelaHello() {
   lcd.print("Recreio! :)");
   lcd.setCursor(0, 1);
 
-  for (int i = 0; i < 16; i++) {
+  for (int i = 0; i < 16; i++)
+  {
     lcd.write(byte(0));
   }
-  
-  for (int i = 0; i < 16; i ++) {
+
+  for (int i = 0; i < 16; i++)
+  {
     lcd.setCursor(i, 1);
     lcd.write(byte(1));
     delay(1000);
   }
 }
 
-void montaTelaBlank() {
+void montaTelaBlank()
+{
   Serial.println("called montaTelaClear()");
   lcd.clear();
   delay(15000);
 }
 
-
-
-void loop() {
+void loop()
+{
 
   horas = Serial.read();
 
-  if (horas != 0) {
-  montaTelaHello();
-  montaTelaBlank();
+  if (horas != -1)
+  {
+    aula_1 = horas - 48;
+
+    montaTelaHello();
+    montaTelaBlank();
+    Serial.println(horas);
   }
-	
-  horas = 0;
+
+  horas = -1;
 }
