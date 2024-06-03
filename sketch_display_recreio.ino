@@ -8,10 +8,6 @@
 const int rs = 3, en = 4, d4 = A2, d5 = A3, d6 = A4, d7 = A5;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
-int segundos_aula_1 = -1;
-int segundos_aula_2 = -1;
-int segundos_intervalo = -1;
-
 byte quadrado_vazio[8] = {
     B11111,
     B10001,
@@ -41,7 +37,7 @@ void setup()
   // set up start communications
   Serial.begin(9600);
   Serial.println("initializing setup...");
-  Serial.println("Informe duração primeiro periodo de aula");
+
   // ## Display LCD
 
   // set up the LCD's number of columns and rows:
@@ -124,17 +120,6 @@ void montaTelaBlank()
 
 void loop()
 {
-
-  horas = Serial.read();
-
-  if (horas != -1)
-  {
-    aula_1 = horas - 48;
-
-    montaTelaHello();
-    montaTelaBlank();
-    Serial.println(horas);
-  }
-
-  horas = -1;
+  montaTelaHello();
+  montaTelaBlank();
 }
