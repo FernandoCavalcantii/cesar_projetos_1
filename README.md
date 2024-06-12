@@ -32,6 +32,7 @@ Funciona de maneira similar a um termômetro, porém para mostrar a intensidade 
 
   <details>
   <summary><strong>Modelo 3D no Tinkercad</strong></summary><br />
+  - Link: https://www.tinkercad.com/things/fvghRnkwYyp-led-audio?sharecode=2ow9Vto5A9zpc92j2_g9yuboOWms0PyXuIgD6JMPQ0c
   </details>
   
 ### Tecnologias utilizadas
